@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Confirmação de Entrega</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 450px;
+    margin: auto;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.08);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.logo img {
+    max-width: 140px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info-pedido {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.produto-box {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.produto-box img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #e754a6;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 20px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #d64395;
+}
+
+textarea, input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.resultado {
+    margin-top: 20px;
+    background: #d4edda;
+    padding: 12px;
+    border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">
+        <img src="logo.jpg" alt="Grupo Flora">
+    </div>
+
+    <h2>Confirmação de Entrega</h2>
+
+    <div class="info-pedido">
+        <strong>Pedido:</strong> #70003446IF<br>
+        <strong>Destinatário:</strong> Maria Silva<br>
+        <strong>Telefone:</strong> (11) 99999-9999<br>
+        <strong>Endereço:</strong> Rua das Flores, 120 - Centro<br>
+        <strong>Produto:</strong> Buquê de 12 Rosas Vermelhas + Ferrero Rocher 12 unidades
+    </div>
+
+    <!-- IMAGEM DO PRODUTO -->
+    <div class="produto-box">
+        <strong>Imagem do Produto</strong>
+        <img src="produto.jpg" alt="Produto do Pedido">
+    </div>
+
+    <p><strong>Quem recebeu?</strong></p>
+
+    <label><input type="radio" name="recebimento" value="Em mãos"> Em mãos</label><br>
+    <label><input type="radio" name="recebimento" value="Vizinho"> Vizinho</label><br>
+    <label><input type="radio" name="recebimento" value="Portaria"> Portaria / Recepção</label><br>
+    <label><input type="radio" name="recebimento" value="Familiar"> Familiar</label><br>
+    <label><input type="radio" name="recebimento" value="Outro"> Outro</label>
+
+    <p><strong>Nome de quem recebeu:</strong></p>
+    <input type="text" id="nomeRecebeu" placeholder="Digite o nome">
+
+    <p><strong>Observação / Assinatura digital:</strong></p>
+    <textarea id="assinatura" placeholder="Observação ou assinatura"></textarea>
+
+    <p><strong>Adicionar Foto da Entrega:</strong></p>
+    <input type="file" accept="image/*" capture="environment">
+
+    <button onclick="confirmarEntrega()">Confirmar Entrega</button>
+
+    <div class="resultado" id="resultado"></div>
+
+</div>
+
+<script>
+function confirmarEntrega() {
+    let recebimento = document.querySelector('input[name="recebimento"]:checked');
+    let nome = document.getElementById("nomeRecebeu").value;
+    let assinatura = document.getElementById("assinatura").value;
+
+    if (!recebimento) {
+        alert("Selecione quem recebeu.");
+        return;
+    }
+
+    let agora = new Date();
+    let dataHora = agora.toLocaleString();
+
+    document.getElementById("resultado").innerHTML =
+        "<strong>Entrega Confirmada!</strong><br><br>" +
+        "Data/Hora: " + dataHora + "<br>" +
+        "Recebido por: " + recebimento.value + "<br>" +
+        "Nome: " + nome + "<br>" +
+        "Observação: " + assinatura;
+}
+</script>
+
+</body>
+</html>
